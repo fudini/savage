@@ -1,0 +1,16 @@
+What savage does:
+
+parses svg shapes into canvas drawing commands.
+
+supported shapes: rect, circle, ellipse, polygon, path, polyline
+supported transform commands: matrix
+
+Note: It only supports SVG files created with Adobe Illustrator
+
+Usage:
+
+var parsedSVG = Savage.Parser.parse(svg)
+var parsedElement = Savage.Parser.parseElement(svgNode) - converts svg node into a Savage.object
+returns Savage.object - a collection of paths
+
+Depends on Class.js - http://ejohn.org/blog/simple-javascript-inheritance/
