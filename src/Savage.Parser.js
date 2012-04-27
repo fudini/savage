@@ -27,7 +27,7 @@ Savage.Parser = {
 				result.push(savage);
 			}
 		}
-		return {elements: result};
+		return {elements: result, hitmap: hitmap, center:center};
 	},
 	parseElement: function(element) {
 		var tag = element.tagName.toLowerCase();
@@ -215,6 +215,76 @@ Savage.Parser = {
 						y = data.y3;
 						command = item;
 						break;
+					case "q":
+						var data = {
+							x: x + parseFloat(path.shift()),
+							y: y + parseFloat(path.shift()),
+							x2: x + parseFloat(path.shift()),
+							y2: y + parseFloat(path.shift())
+						};
+						commands.push({
+							type: 'q',
+							data: data
+						});
+						x = data.x2;
+						y = data.y2;
+						command = item;
+						break;
+					case "Q":
+						var data = {
+							x: parseFloat(path.shift()),
+							y: parseFloat(path.shift()),
+							x2: parseFloat(path.shift()),
+							y2: parseFloat(path.shift())
+						};
+						commands.push({
+							type: 'q',
+							data: data
+						});
+						x = data.x2;
+						y = data.y2;
+						command = item;
+						break;
+					case "t":
+						var previousCommand = commands[commands.length - 1];
+						if("qQtT".indexOf(previousCommand.type) != -1) {
+							var data = {
+								x: x + x - previousCommand.data.x,
+								y: y + y - previousCommand.data.y,
+								x2: x + parseFloat(path.shift()),
+								y2: y + parseFloat(path.shift())
+							};
+							commands.push({
+								type: 'q',
+								data: data
+							});
+							x = data.x2;
+							y = data.y2;
+							command = item;
+						} else {
+							Savage.error("previous command not a quadratic bezier (qQtT)");
+						}
+						break;
+					case "T":
+						var previousCommand = commands[commands.length - 1];
+						if("qQtT".indexOf(previousCommand.type) != -1) {
+							var data = {
+								x: x + x - previousCommand.data.x2,
+								y: y + y - previousCommand.data.y2,
+								x2: parseFloat(path.shift()),
+								y2: parseFloat(path.shift())
+							};
+							commands.push({
+								type: 'c',
+								data: data
+							});
+							x = data.x2;
+							y = data.y2;
+							command = item;
+						} else {
+							Savage.error("previous command not a quadratic bezier (qQtT)");
+						}
+						break;
 					case "s":
 						var previousCommand = commands[commands.length - 1];
 						if("cCsS".indexOf(previousCommand.type) != -1) {
@@ -308,8 +378,8 @@ Savage.Parser = {
 					break;
 			}
 			return value;
-		}).replace(/\,+/g, ",").replace(/^\,|\,$/g, "").split(",");
-		return result;
+		}).replace(/\,+/g, ",").replace(/^\,|\,$/g, "");
+		return result.split(",");
 	},
 	pointsToBox: function(points) {
 		var box = {

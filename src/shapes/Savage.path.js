@@ -19,6 +19,9 @@ Savage.path = Savage.element.extend({
 				case "c":
 					context.bezierCurveTo(command.data.x, command.data.y, command.data.x2, command.data.y2, command.data.x3, command.data.y3);
 					break;
+				case "q":
+					context.bezierCurveTo(command.data.x, command.data.y, command.data.x2, command.data.y2, command.data.x2, command.data.y2);
+					break;
 			}
 		}
 		context.closePath();
