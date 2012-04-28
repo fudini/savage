@@ -55,11 +55,12 @@ Savage.Parser = {
 		"cy" : "y",
 		"r"	: "radius",
 		"d" : "commands",
-		"stroke-width": "strokeWidth"
+		"stroke-width": "strokeWidth",
+		"horiz-adv-x": "horizAdvX"
 	},
 	// allowed attributes names and their corresponding parse methods
 	attributeTypes: {
-		"width,height,x,y": "float",
+		"width,height,x,y,horizAdvX": "float",
 		"rx,ry,radius,opacity,strokeWidth": "float",
 		"fill,stroke": "color",
 		"transform": "transform",
