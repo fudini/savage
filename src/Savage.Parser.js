@@ -66,7 +66,7 @@ Savage.Parser = {
 		"transform": "transform",
 		"commands": "d",
 		"points": "points",
-		"id": "string"
+		"id,unicode": "string"
 	},
 	attributeTypesMap: null,
 	// get the attributeTypes object and convert to name-value pairs for a quick lookup
