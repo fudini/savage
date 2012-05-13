@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Savage tests</title>
+		<script type="text/javascript" src="src/Class.js"></script>
+		<script type="text/javascript" src="src/Savage.js"></script>
+		<script type="text/javascript" src="src/Savage.object.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.element.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.rect.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.circle.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.ellipse.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.path.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.glyph.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.polygon.js"></script>
+		<script type="text/javascript" src="src/shapes/Savage.polyline.js"></script>
+		<script type="text/javascript" src="src/Savage.utils.js"></script>
+		<script type="text/javascript" src="src/Savage.Parser.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			Nothing fancy here yet..
+		</div>
+		<div id="svg">
+			<rect id="symbol1" x="780" y="480" onactivate="{somevariable:100}" fill="#FF0000" width="40" height="60"/>
+			<rect id="symbol2" x="800" y="180" fill="#FF0000" width="40" height="60"/>
+			<rect id="symbol3" x="1160" y="180" fill="#FF0100" width="40" height="60"/>
+			<rect id="symbol4" x="1810" y="660" fill="#FF0100" width="40" height="60"/>
+			<rect id="symbol5" x="1640" y="580" fill="#FF0000" width="40" height="60"/>
+			<rect id="symbol6" x="1720" y="260" fill="#FF0000" width="40" height="60"/>
+		</div>
+		<script>
+			$(function() {
+				var $elements = $('rect');
+				$elements.each(function(index, item) {
+					var element = Savage.Parser.parseElement($(item)[0]);
+					console.log(element);
+				});
+			});
+		</script>
+	</body>
+</body>
