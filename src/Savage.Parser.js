@@ -41,10 +41,15 @@ Savage.Parser = {
 		for(var i = 0; i < attributes.length; i ++) {
 			var attributeName = attributes[i].nodeName;
 			var attributeValue = attributes[i].nodeValue;
-			if(this.attributeMap[attributeName]) attributeName = this.attributeMap[attributeName];
+			if(this.attributeMap[attributeName]) {
+				attributeName = this.attributeMap[attributeName];
+			}
 			var parseFunctionName = this.attributeTypesMap[attributeName];
 			if(this.parseAttribute[parseFunctionName]) {
 				result[attributeName] = this.parseAttribute[parseFunctionName](attributeValue);
+			} else {
+				// this will write in other attributes
+				result[attributeName] = attributeValue;
 			}
 		}
 		return result;
