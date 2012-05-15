@@ -12,7 +12,6 @@ Usage:
 var savage = Savage.Parser.parse(svg); 
 savage.render(context);
 
-
 Parsing and rendering single nodes:
 
 var savage = new Savage.object();
