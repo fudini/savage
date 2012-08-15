@@ -27,7 +27,7 @@ Savage.Parser = {
 				result.push(savage);
 			}
 		}
-		return {elements: result, hitmap: hitmap, center:center};
+		return {elements: result};
 	},
 	parseElement: function(element) {
 		var tag = element.tagName.toLowerCase();
